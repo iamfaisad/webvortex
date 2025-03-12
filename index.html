@@ -46,10 +46,9 @@
 </div>
 
 <!-- Blog Container -->
-<div class="container" id="blog-container"></div>
+<div id="blog-container"></div>
 
 <footer class="footer">© 2025 My Blog | All Rights Reserved</footer>
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         fetch("blogs.json")
@@ -63,10 +62,8 @@
                     let blogPost = document.createElement("div");
                     blogPost.classList.add("blog-post");
                     blogPost.innerHTML = `
-                        <h2>${blog.title}</h2>
+                        <h2><a href="blog.html?id=${blog.id}">${blog.title}</a></h2>
                         <p><strong>Date:</strong> ${blog.date}</p>
-                        <div class="blog-content">${blog.content}</div>
-                        <button class="btn" onclick="toggleContent(this)">Read More</button>
                     `;
                     blogContainer.appendChild(blogPost);
                 }
