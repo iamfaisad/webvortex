@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { display: flex; flex-direction: column; min-height: 100vh; background: #f4f4f4; color: #333; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .footer { text-align: center; padding: 10px; margin-top: 20px; background: #2c3e50; color: white; border-radius: 5px; }
+        .btn { display: inline-block; margin-top: 10px; padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; text-decoration: none; text-align: center; }
+        .btn:hover { background: #16a085; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="blog-title">Loading...</h1>
+    <p><strong>Date:</strong> <span id="blog-date"></span></p>
+    <p id="blog-content"></p>
+    <a href="index.html" class="btn">⬅ Back to Blogs</a>
+</div>
+
+<footer class="footer">© 2025 My Blog | All Rights Reserved</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+        const blogId = params.get("id");
+
+        fetch("blogs.json")
+            .then(response => response.json())
+            .then(blogs => {
+                if (blogs[blogId]) {
+                    document.getElementById("blog-title").innerText = blogs[blogId].title;
+                    document.getElementById("blog-date").innerText = blogs[blogId].date;
+                    document.getElementById("blog-content").innerText = blogs[blogId].content;
+                } else {
+                    document.getElementById("blog-title").innerText = "Blog Not Found";
+                    document.getElementById("blog-content").innerText = "Sorry, this blog does not exist.";
+                }
+            })
+            .catch(error => console.error("Error loading blog:", error));
+    });
+</script>
+
+</body>
+</html>
